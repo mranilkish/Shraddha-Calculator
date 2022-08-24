@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="utf=8">
+    <meta name="description" content="Date Calculator" />
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masika Calculator</title>
+	<head>
+
+	<link href="" rel="stylesheet" type="text/css"  />
+	  <link rel="stylesheet" href="style.css">
+<style type="text/css">
+@import url(reset.css);
+.calenderBox{width:580px; height:300px; padding:10px; background:#ddd; }
+.calenderBox .calenderTop{position:relative; height:50px;}
+.calenderBox .monthShow{display:block; width:560px; height:50px; overflow:hidden; margin:0 auto; font:bold 22px/50px "microsoft yahei"; color:#000; text-align:center;}
+.calenderBox .monthPrev,
+.calenderBox .monthNext,
+.calenderBox .yearPrev,
+.calenderBox .yearNext{position:absolute; top:15px; display:block; width:20px; height:21px; font:bold 20px/21px arial; text-decoration:none; color:#000;}
+.calenderBox .monthPrev{left:55px;}
+.calenderBox .monthNext{right:55px; text-align:right;}
+.calenderBox .yearPrev{left:20px; color:#aaa;}
+.calenderBox .yearNext{right:20px; text-align:right; color:#aaa;}
+
+.calenderBox .dateBox{width:260px; margin:5px auto;}
+.calenderBox .dateBox span{display:inline-block; width:33px; height:29px; font:normal 14px/29px arial; border:1px solid #888; margin:1px; color:#000; text-align:center; cursor:pointer;}
+.calenderBox .dateTitle span{width:35px; border:none; font-weight:bold;}
+.calenderBox .dateCont span.noCont{width:35px; height:31px; border:none; cursor:default;}
+.calenderBox .dateBox span.nowDate{background:#06c; color:#fff;}
+.calenderBox .dateBox span.dateHover{background:#fff; color:#666;}
+.calenderBox .dateBox span.dateCurr{background:#eee; color:#06c;}
+.calenderBox .dateBox span.dateActive{background:#ff0; color:#06c;}
+</style>
+
+</head>
+
+<body>
+	<b style="font-size: medium;"> Masika/Sraddha/Tarpana/Abdika/Savatharika Caluculator</b><br />
+    Enter Date of Death:<input type="date" id="dd"> <br /> 
+    Enter Time of Death:<input type="time" id="tt"> <br />  	
+Day:<b id="day"></b>
+Tithi:<b id="tithi"></b>
+Nakshtra:<b id="nakshtra"></b>
+Karna:<b id="karna"></b>
+Yoga:<b id="yoga"></b>
+Raasi:<b id="raasi"></b>
+Ayanamsa:<b id="ayanamsa"></b>
+
+  <br>
+  <br><b>Sradda rituals dates According to Tithi</b>
+  <input type="button" onclick="panch()" value="list all">
+  <p id="thithi"></p>
+ <br> <b>Sradda rituals dates According to Number of Days</b>
+ <input type="button" onclick="samva()" value="list all">
+ <table border=1>
+ <tr><td valign=top><div id="dat"></div><tr>
+ <tr></tr><td><div id="dat2"></div></td><br>
+
+</tr>
+
+
+</table>
+
+<div id="messageBox" style="position:fixed;top:40px;right:50px"></div>
+
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="calender.js"></script>
+<script src="panchang.js"></script>
+
+   <script>
+   var zz=[]
+   var yy=[]
+   function samva()
+   {
+   ff=document.getElementById("dat")
+   ff.innerHTML=""; 
+   gg=document.getElementById("dat2")
+   gg.innerHTML="";
+   str1="<div id=calenderBox"   
+   str2=" class=calenderBox></div>"
+
+   
+   a=[12,30,41,60,90,120,150,171,180,210,240,270,300,330,355,359,360]
+   b=["ఊన మాసికం","ద్వితీయ  మాసికం","త్రైపక్షికం(5)","తృతీయ  మాసికం","చతుర్థ  మాసికం","పంచమ  మాసికం","షాణ్మాసికం","ఊన షాణ్మాసికం(5)","సప్తమ  మాసికం","అష్టమ  మాసికం","నవమ  మాసికం","దశమ  మాసికం","ఏకాదశ  మాసికం","ద్వాదశ  మాసికం","ఊనాబ్దికం","సంవత్సరీకం","ప్రథమాబ్దికం"]
+   
+      for(i=0;i<a.length;i++)
+   gg.innerHTML+=str1+(i+1)+str2; 
+   
+   d=document.getElementById("dd")   
+   for(i=0;i<a.length;i++)
+   {
+    jj=new Date(d.value);
+   k=jj.setDate(jj.getDate() + a[i]);
+   k=new Date(k);
+   ff.innerHTML+= "<BR> "+(i+1)+".) "+(k).toString().split(' ').splice(0,4).join(' ')+" "+b[i]+ " "+a[i]+"వ రోజు";
+   zz[i]=k.getFullYear()+","+(k.getMonth()+1)+","+k.getDate()
+   if(i!=0)
+   yy[i-1]={"date":zz[i], "description":b[i]+ " "+a[i]+"వ రోజు" };
+    //alert(zz[0])
+		
+   }
+   iter()
+  
+   
+   }
+   
+      function iter(){
+	  
+	  
+$(function($){
+     function showDis(date){
+			
+			var dateStr = arguments[0];
+			var ev = arguments[1];
+			var year = parseInt(dateStr.slice(0,4), 10), month = parseInt(dateStr.slice(4,6), 10), day = parseInt(dateStr.slice(-2), 10);
+			var html = year + ' Year ' + month + ' Month ' + day + ' day';
+			if ($(ev.target).hasClass('dateActive')){
+				console.log($(ev.target).data);
+				html += '&nbsp;&nbsp;' + $(ev.target).data('description') ;
+			}
+			$('#messageBox').html(html);
+		}
+	  i=0
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			clickFunction: showDis,
+			specialDate:yy,
+		});
+		})
+		
+$(function($){
+	  i=1
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		
+$(function($){
+	  i=2
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		$(function($){
+	  i=3
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		
+		
+		$(function($){
+	  i=4
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		
+		$(function($){
+	  i=5
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		
+		$(function($){
+	  i=6
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		
+		$(function($){
+	  i=7
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		
+		$(function($){
+	  i=8
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		
+		$(function($){
+	  i=9
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		
+		$(function($){
+	  i=10
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		
+		
+		$(function($){
+	  i=11
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		
+		$(function($){
+	  i=12
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		
+		$(function($){
+	  i=13
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		
+		$(function($){
+	  i=14
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		
+		$(function($){
+	  i=15
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		
+		$(function($){
+	  i=16
+   var myCalender= Calender(zz[i],i);
+		myCalender.init({
+			boxId: 'calenderBox'+(i+1),
+			
+		});
+		})
+		
+		
+		
+		
+		
+		}
+		function panch()
+		{
+		 var d=document.getElementById("dd")			 
+		 var t=document.getElementById("tt")
+		  kk=new Date(d.value);	
+		  t1=t.value.split(":")
+	
+		   kk.setHours(t1[0]);
+		   kk.setMinutes(t1[1]);
+		   kk.setSeconds(0);  	 
+var str;
+		 panchang.calculate(kk, function() {
+    document.getElementById("day").innerHTML=":-"+panchang.Day.name;
+    document.getElementById("tithi").innerHTML=":-"+panchang.Tithi.name 
+    document.getElementById("nakshtra").innerHTML=":-"+panchang.Nakshatra.name;
+    document.getElementById("karna").innerHTML=":-"+panchang.Karna.name;
+    document.getElementById("yoga").innerHTML=":-"+panchang.Yoga.name;
+    document.getElementById("raasi").innerHTML=":-"+panchang.Raasi.name;
+    document.getElementById("ayanamsa").innerHTML=":-"+panchang.Ayanamsa.name;
+	str=panchang.Tithi.name;
+  });
+
+  var j=0;
+  var ind=0;
+var str2=[];
+//  alert(str)
+  for(j=0;j<365;j++)
+  {
+	kkk=new Date(kk);
+	kkk.setDate(kkk.getDate()+j)
+	panchang.calculate(kkk,function() {
+//		alert(panchang.Tithi.name)
+		if(panchang.Tithi.name== str)
+	{ 
+		kk1=(kkk.toString().split(' ').splice(0, 4).join(' '));
+		kk2=panchang.Tithi.start.toString().split(' ').splice(0, 5).join(' ');
+		kk3=panchang.Tithi.end.toString().split(' ').splice(0, 5).join(' ');
+		//alert(kkk.toString().split(' ').splice(0, 5).join(' '));
+		
+		str2[ind]=".) "+kk1+" <b>  (Start:"+kk2+" to  End:"+kk3+")</b>"
+
+		ind++;
+	}
+  });
+  
+		}
+		stri="";ind2=1;
+		for(j=0;j<str2.length;j++)
+		{
+			if(ind2==13) break;
+			if(str!="Punnami"&&str!="Amavasya")
+			if(j%2==1)
+			continue;
+			stri+="<br>"+ind2+str2[j]
+			ind2++;
+		}
+		ff=document.getElementById("thithi")
+   ff.innerHTML=stri;
+   str2="";
+	}
+   </script>
+   <br>
+
+        
+</body>
+
+</html>
