@@ -8,5 +8,5 @@ If you are not aware of death time or in case of missing person or information, 
 Disclaim:The thiti calculation takes little long time for dispalying information dont repress the function or dont force stop the script.
 
 thanks to
-https://github.com/lacmo/calender
-https://github.com/schenna/panchangJS
+1. https://github.com/lacmo/calender<br>
+2. https://github.com/schenna/panchangJS
