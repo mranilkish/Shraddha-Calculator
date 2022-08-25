@@ -1,6 +1,7 @@
 var Calender = function(wat,koan){
 	var mS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-	b=["ఊన మాసికం","ద్వితీయ  మాసికం","త్రైపక్షికం(5)","తృతీయ  మాసికం","చతుర్థ  మాసికం","పంచమ  మాసికం","షాణ్మాసికం","ఊన షాణ్మాసికం(5)","సప్తమ  మాసికం","అష్టమ  మాసికం","నవమ  మాసికం","దశమ  మాసికం","ఏకాదశ  మాసికం","ద్వాదశ  మాసికం","ఊనాబ్దికం","సంవత్సరీకం","ప్రథమాబ్దికం"]
+	//b=["oona maasikaM","dviteeya  maasikaM","traipakShikaM(5)","tRiteeya  maasikaM","chaturtha  maasikaM","paMchama  maasikaM","ShaaNmaasikaM","oona ShaaNmaasikaM(5)","saptama  maasikaM","aShTama  maasikaM","navama  maasikaM","dashama  maasikaM","Ekaadasha  maasikaM","dvaadasha  maasikaM","oonaabdikaM","saMvatsareekaM","prathamaabdikaM","th Day","th aabdikaM ("]
+	b=["ఊన మాసికం","ద్వితీయ  మాసికం","త్రైపక్షికం(5)","తృతీయ  మాసికం","చతుర్థ  మాసికం","పంచమ  మాసికం","షాణ్మాసికం","ఊన షాణ్మాసికం(5)","సప్తమ  మాసికం","అష్టమ  మాసికం","నవమ  మాసికం","దశమ  మాసికం","ఏకాదశ  మాసికం","ద్వాదశ  మాసికం","ఊనాబ్దికం","సంవత్సరీకం","ప్రథమాబ్దికం","వ రోజు","వ ఆబ్దికం ("]
 	kon=b[koan]
 	masik=[12,30,41,60,90,120,150,171,180,210,240,270,300,330,355,359,360]
 	mas=masik[koan]

@@ -10,7 +10,7 @@
 	  <link rel="stylesheet" href="style.css">
 <style type="text/css">
 @import url(reset.css);
-.calenderBox{width:500px; height:300px; padding:10px; background:#ddd; }
+.calenderBox{width:550px; height:300px; padding:10px; background:#ddd; }
 .calenderBox .calenderTop{position:relative; height:50px;}
 .calenderBox .monthShow{display:block; width:560px; height:50px; overflow:hidden; margin:0 auto; font:bold 22px/50px "microsoft yahei"; color:#000; text-align:center;}
 .calenderBox .monthPrev,
@@ -35,7 +35,8 @@
 </head>
 
 <body>
-	<b style="font-size: medium;"> Masika/Sraddha/Tarpana/<br >Abdika/Samvathsarikam Calculator</b><br />
+	<b style="font-size: medium;"> Masika/Sraddha/Tarpana/<br >Abdika/Samvathsarikam Calculator</b>
+	<input type="checkbox" id="tel"> English<br>
     Enter Date of Death:<input type="date" id="dd"> <br /> 
     Enter Time of Death:<input type="time" id="tt"> <br />  	
 Day:<b id="day"></b>
@@ -48,6 +49,7 @@ Ayanamsa:<b id="ayanamsa"></b>
 
   <br>
   <br><b>Sradda rituals dates According to Tithi</b>
+  
   <input type="button" onclick="panch()" value="list all">
   <p id="thithi"></p>
  <br> <b>Sradda rituals dates According to Number of Days</b>
@@ -82,8 +84,15 @@ Ayanamsa:<b id="ayanamsa"></b>
 
    
    a=[12,30,41,60,90,120,150,171,180,210,240,270,300,330,355,359,360]
-   b=["ఊన మాసికం","ద్వితీయ  మాసికం","త్రైపక్షికం(5)","తృతీయ  మాసికం","చతుర్థ  మాసికం","పంచమ  మాసికం","షాణ్మాసికం","ఊన షాణ్మాసికం(5)","సప్తమ  మాసికం","అష్టమ  మాసికం","నవమ  మాసికం","దశమ  మాసికం","ఏకాదశ  మాసికం","ద్వాదశ  మాసికం","ఊనాబ్దికం","సంవత్సరీకం","ప్రథమాబ్దికం"]
+   bb=["ఊన మాసికం","ద్వితీయ  మాసికం","త్రైపక్షికం(5)","తృతీయ  మాసికం","చతుర్థ  మాసికం","పంచమ  మాసికం","షాణ్మాసికం","ఊన షాణ్మాసికం(5)","సప్తమ  మాసికం","అష్టమ  మాసికం","నవమ  మాసికం","దశమ  మాసికం","ఏకాదశ  మాసికం","ద్వాదశ  మాసికం","ఊనాబ్దికం","సంవత్సరీకం","ప్రథమాబ్దికం","వ రోజు","వ ఆబ్దికం ("]
+   cc=["oona maasikaM","dviteeya  maasikaM","traipakShikaM(5)","tRiteeya  maasikaM","chaturtha  maasikaM","paMchama  maasikaM","ShaaNmaasikaM","oona ShaaNmaasikaM(5)","saptama  maasikaM","aShTama  maasikaM","navama  maasikaM","dashama  maasikaM","Ekaadasha  maasikaM","dvaadasha  maasikaM","oonaabdikaM","saMvatsareekaM","prathamaabdikaM","th Day","th aabdikaM ("]
+   flag=document.getElementById("tel");
+   if(flag.checked)
+   {
+	bb=cc;
+   }
    
+
       for(i=0;i<a.length;i++)
    gg.innerHTML+=str1+(i+1)+str2; 
    
@@ -93,10 +102,10 @@ Ayanamsa:<b id="ayanamsa"></b>
     jj=new Date(d.value);
    k=jj.setDate(jj.getDate() + a[i]);
    k=new Date(k);
-   ff.innerHTML+= "<BR> "+(i+1)+".) "+(k).toString().split(' ').splice(0,4).join(' ')+" "+b[i]+ " "+a[i]+"వ రోజు";
+   ff.innerHTML+= "<BR> "+(i+1)+".) "+(k).toString().split(' ').splice(0,4).join(' ')+" "+bb[i]+ " "+a[i]+bb[17];
    zz[i]=k.getFullYear()+","+(k.getMonth()+1)+","+k.getDate()
    if(i!=0)
-   yy[i-1]={"date":zz[i], "description":b[i]+ " "+a[i]+"వ రోజు" };
+   yy[i-1]={"date":zz[i], "description":bb[i]+ " "+a[i]+bb[17] };
     //alert(zz[0])
 		
    }
@@ -116,7 +125,7 @@ Ayanamsa:<b id="ayanamsa"></b>
 	jj=new Date(d.value);
 	k=jj.setDate(jj.getDate() + x*360);
 	k=new Date(k);
-   ff.innerHTML+= "<BR> "+(x)+".) "+(k).toString().split(' ').splice(0,4).join(' ')+"&nbsp;&nbsp;"+x+"వ ఆబ్దికం ("+x*360+"వ రోజు)";
+   ff.innerHTML+= "<BR> "+(x)+".) "+(k).toString().split(' ').splice(0,4).join(' ')+"&nbsp;&nbsp;"+x+bb[18]+x*360+bb[17]+")";
 
    }
    
@@ -137,7 +146,7 @@ $(function($){
 			$('#messageBox').html(html);
 		}
 	  i=0
-   var myCalender= Calender(zz[i],i);
+   var myCalender= Calender(zz[i],i,bb);
 		myCalender.init({
 			boxId: 'calenderBox'+(i+1),
 			clickFunction: showDis,
