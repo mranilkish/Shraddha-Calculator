@@ -10,7 +10,7 @@
 	  <link rel="stylesheet" href="style.css">
 <style type="text/css">
 @import url(reset.css);
-.calenderBox{width:580px; height:300px; padding:10px; background:#ddd; }
+.calenderBox{width:500px; height:300px; padding:10px; background:#ddd; }
 .calenderBox .calenderTop{position:relative; height:50px;}
 .calenderBox .monthShow{display:block; width:560px; height:50px; overflow:hidden; margin:0 auto; font:bold 22px/50px "microsoft yahei"; color:#000; text-align:center;}
 .calenderBox .monthPrev,
@@ -35,7 +35,7 @@
 </head>
 
 <body>
-	<b style="font-size: medium;"> Masika/Sraddha/Tarpana/Abdika/Savatharika Caluculator</b><br />
+	<b style="font-size: medium;"> Masika/Sraddha/Tarpana/Abdika/Samvathsarikam Calculator</b><br />
     Enter Date of Death:<input type="date" id="dd"> <br /> 
     Enter Time of Death:<input type="time" id="tt"> <br />  	
 Day:<b id="day"></b>
@@ -70,6 +70,7 @@ Ayanamsa:<b id="ayanamsa"></b>
    <script>
    var zz=[]
    var yy=[]
+   var jj
    function samva()
    {
    ff=document.getElementById("dat")
@@ -99,9 +100,24 @@ Ayanamsa:<b id="ayanamsa"></b>
     //alert(zz[0])
 		
    }
+
+   ff.innerHTML+="<br><input id=abd type=textbox  value=2><input type=button onclick=abdc() value=cal><br><p id=abdr></p> "
    iter()
   
    
+   }
+   function abdc()
+   {
+	y=document.getElementById("abd")
+	x=y.value
+	x=parseInt(x)
+	y.defaultValue=""+(x+1)
+	d=document.getElementById("dd") 
+	jj=new Date(d.value);
+	k=jj.setDate(jj.getDate() + x*360);
+	k=new Date(k);
+   ff.innerHTML+= "<BR> "+(x)+".) "+(k).toString().split(' ').splice(0,4).join(' ')+"&nbsp;&nbsp;"+x+"వ ఆబ్దికం";
+
    }
    
       function iter(){
