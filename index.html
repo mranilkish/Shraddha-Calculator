@@ -377,11 +377,11 @@ fff.innerHTML=""
 	}
 	function nextm()
 	{
-		jjj=lll
+	
 
 		fff=document.getElementById("thithi")
 	
-  for(jj=jjj;jj<jjj+31;jj++)
+  for(jj=lll;jj<lll+31;jj++)
   {
 	
 	kkk=new Date(kk);
@@ -392,7 +392,7 @@ fff.innerHTML=""
 //		alert(panchang.Tithi.name)
 		if(panchang.Tithi.name== strr)
 	{ 
-		jj+=27
+		jj+=27;
 		kk1=(kkk.toString().split(' ').splice(0, 4).join(' '));
 		kk2=panchang.Tithi.start.toString().split(' ').splice(0, 5).join(' ');
 		kk3=panchang.Tithi.end.toString().split(' ').splice(0, 5).join(' ');
@@ -404,12 +404,13 @@ fff.innerHTML=""
  
 
 	}
+
 	
 
   });
 
 }
-lll+=jj	
+lll+=30
 		
 	}
    </script>
