@@ -304,8 +304,15 @@ $(function($){
 		
 		
 		}
+		ind=1;
+		strr=""
+	
 		function panch()
 		{
+			ind=1;
+			var jjj=0;
+			var str="";
+	
 		 var d=document.getElementById("dd")			 
 		 var t=document.getElementById("tt")
 		  kk=new Date(d.value);	
@@ -314,7 +321,7 @@ $(function($){
 		   kk.setHours(t1[0]);
 		   kk.setMinutes(t1[1]);
 		   kk.setSeconds(0);  	 
-var str;
+
 		 panchang.calculate(kk, function() {
     document.getElementById("day").innerHTML=":-"+panchang.Day.name;
     document.getElementById("tithi").innerHTML=":-"+panchang.Tithi.name 
@@ -326,43 +333,84 @@ var str;
 	str=panchang.Tithi.name;
   });
 
-  var j=0;
-  var ind=0;
-var str2=[];
+ 
+
 //  alert(str)
-  for(j=0;j<365;j++)
+fff=document.getElementById("thithi")
+fff.innerHTML=""
+
+  for(jjj=0;jjj<400;jjj++)
   {
+	
 	kkk=new Date(kk);
-	kkk.setDate(kkk.getDate()+j)
+	kkk.setDate(kkk.getDate()+jjj)
 	panchang.calculate(kkk,function() {
 //		alert(panchang.Tithi.name)
 		if(panchang.Tithi.name== str)
 	{ 
+		jjj+=27
+		kk1=(kkk.toString().split(' ').splice(0, 4).join(' '));
+		kk2=panchang.Tithi.start.toString().split(' ').splice(0, 5).join(' ');
+		kk3=panchang.Tithi.end.toString().split(' ').splice(0, 5).join(' ');
+		//alert(kkk.toString().split(' ').splice(0, 5).join(' '));
+		//alert(kk1)
+		fff.innerHTML+="<br>"+ind+".) "+kk1+"<br><b>&nbsp;&nbsp;&nbsp;(Start:"+kk2+"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to  End:"+kk3+")</b>"
+   //fff.innerHTML+="<br>"+str2[ind];
+   ind++;
+   //j+=25;
+   
+	}
+	
+
+  });
+  if(ind==13) 
+  {
+	fff.innerHTML+="<br><input type=button value=nextmasikam onclick='nextm()'>"
+   break;
+  }
+}
+	
+
+   lll=jjj
+   strr=str
+
+	}
+	function nextm()
+	{
+		jjj=lll
+
+		fff=document.getElementById("thithi")
+	
+  for(jj=jjj;jj<jjj+31;jj++)
+  {
+	
+	kkk=new Date(kk);
+	
+	kkk.setDate(kkk.getDate()+jj)
+	panchang.calculate(kkk,function() {
+
+//		alert(panchang.Tithi.name)
+		if(panchang.Tithi.name== strr)
+	{ 
+		jj+=27
 		kk1=(kkk.toString().split(' ').splice(0, 4).join(' '));
 		kk2=panchang.Tithi.start.toString().split(' ').splice(0, 5).join(' ');
 		kk3=panchang.Tithi.end.toString().split(' ').splice(0, 5).join(' ');
 		//alert(kkk.toString().split(' ').splice(0, 5).join(' '));
 		
-		str2[ind]=".) "+kk1+"<br><b>&nbsp;&nbsp;&nbsp;(Start:"+kk2+"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to  End:"+kk3+")</b>"
+		fff.innerHTML+="<br>"+ind+".) "+kk1+"<br><b>&nbsp;&nbsp;&nbsp;(Start:"+kk2+"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to  End:"+kk3+")</b>"
+   //fff.innerHTML+="<br>"+str2[ind];
+   ind++;
+ 
 
-		ind++;
 	}
+	
+
   });
-  
-		}
-		stri="";ind2=1;
-		for(j=0;j<str2.length;j++)
-		{
-			if(ind2==13) break;
-			if(str!="Punnami"&&str!="Amavasya")
-			if(j%2==1)
-			continue;
-			stri+="<br>"+ind2+str2[j]
-			ind2++;
-		}
-		fff=document.getElementById("thithi")
-   fff.innerHTML=stri;
-   str2="";
+
+}
+lll+=jj	
+		
 	}
    </script>
    <br>
