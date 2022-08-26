@@ -306,7 +306,7 @@ $(function($){
 		}
 		ind=1;
 		strr=""
-	
+		var temp;
 		function panch()
 		{
 			ind=1;
@@ -348,13 +348,14 @@ fff.innerHTML=""
 //		alert(panchang.Tithi.name)
 		if(panchang.Tithi.name== str)
 	{ 
-		jjj+=27
+		jjj+=28
 		kk1=(kkk.toString().split(' ').splice(0, 4).join(' '));
 		kk2=panchang.Tithi.start.toString().split(' ').splice(0, 5).join(' ');
 		kk3=panchang.Tithi.end.toString().split(' ').splice(0, 5).join(' ');
 		//alert(kkk.toString().split(' ').splice(0, 5).join(' '));
 		//alert(kk1)
 		fff.innerHTML+="<br>"+ind+".) "+kk1+"<br><b>&nbsp;&nbsp;&nbsp;(Start:"+kk2+"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to  End:"+kk3+")</b>"
+
    //fff.innerHTML+="<br>"+str2[ind];
    ind++;
    //j+=25;
@@ -366,6 +367,7 @@ fff.innerHTML=""
   if(ind==13) 
   {
 	fff.innerHTML+="<br><input type=button value=nextmasikam onclick='nextm()'>"
+	temp=kkk;
    break;
   }
 }
@@ -375,24 +377,26 @@ fff.innerHTML=""
    strr=str
 
 	}
+	
 	function nextm()
 	{
 	
 
 		fff=document.getElementById("thithi")
-	
-  for(jj=lll;jj<lll+31;jj++)
+	found=true
+  for(jj=lll;found;jj++,lll++)
   {
 	
 	kkk=new Date(kk);
 	
 	kkk.setDate(kkk.getDate()+jj)
 	panchang.calculate(kkk,function() {
-
 //		alert(panchang.Tithi.name)
 		if(panchang.Tithi.name== strr)
 	{ 
-		jj+=27;
+		found=false
+		jj+=28
+		lll+=28
 		kk1=(kkk.toString().split(' ').splice(0, 4).join(' '));
 		kk2=panchang.Tithi.start.toString().split(' ').splice(0, 5).join(' ');
 		kk3=panchang.Tithi.end.toString().split(' ').splice(0, 5).join(' ');
@@ -401,16 +405,13 @@ fff.innerHTML=""
 		fff.innerHTML+="<br>"+ind+".) "+kk1+"<br><b>&nbsp;&nbsp;&nbsp;(Start:"+kk2+"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to  End:"+kk3+")</b>"
    //fff.innerHTML+="<br>"+str2[ind];
    ind++;
- 
-
-	}
 
 	
+	}
 
   });
 
 }
-lll+=30
 		
 	}
    </script>
